@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -57,6 +45,48 @@ class DefaultFirebaseOptions {
     appId: '1:939159106937:android:a7d0da5ff3b3a0e81e6ba8',
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
+    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
+  );
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDXqlS460a7wxLo7isPgM2ihEhVyQtlzrI',
+    appId: '1:939159106937:web:3adb471264ebc45d1e6ba8',
+    messagingSenderId: '939159106937',
+    projectId: 'androidfinalproject-3e903',
+    authDomain: 'androidfinalproject-3e903.firebaseapp.com',
+    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDmQ1ffZUmLEc78Qgnz6pFMqYMWVELkv_I',
+    appId: '1:939159106937:ios:049dd4bade33da231e6ba8',
+    messagingSenderId: '939159106937',
+    projectId: 'androidfinalproject-3e903',
+    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
+    iosClientId: '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
+    iosBundleId: 'com.example.androidLabFinalProject',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDmQ1ffZUmLEc78Qgnz6pFMqYMWVELkv_I',
+    appId: '1:939159106937:ios:049dd4bade33da231e6ba8',
+    messagingSenderId: '939159106937',
+    projectId: 'androidfinalproject-3e903',
+    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
+    iosClientId: '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
+    iosBundleId: 'com.example.androidLabFinalProject',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDXqlS460a7wxLo7isPgM2ihEhVyQtlzrI',
+    appId: '1:939159106937:web:9783f21796783cdf1e6ba8',
+    messagingSenderId: '939159106937',
+    projectId: 'androidfinalproject-3e903',
+    authDomain: 'androidfinalproject-3e903.firebaseapp.com',
+    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
   );
 }
