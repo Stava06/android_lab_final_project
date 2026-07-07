@@ -1,4 +1,6 @@
 
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 
@@ -26,10 +28,16 @@ class AuthService {
       throw Exception('User creation failed');
     }
 
+    // Hash the password using SHA-256
+    final bytes = utf8.encode(password);
+    final digest = sha256.convert(bytes);
+    final hashedPassword = digest.toString();
+
     await _database.child('users').child(user.uid).set({
       'uid': user.uid,
       'fullName': fullName,
       'email': email,
+      'password': hashedPassword,
       'createdAt': DateTime.now().toIso8601String(),
       'updatedAt': DateTime.now().toIso8601String(),
     });
