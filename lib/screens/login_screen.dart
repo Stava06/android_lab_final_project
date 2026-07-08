@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 import 'register_screen.dart';
 
+/// Screen allowing registered users to log in using their email and password credentials.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -10,15 +11,19 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  // Controllers to manage user inputs for the email and password fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  // Flag to manage the loading indicator state during authentication request
   bool isLoading = false;
 
+  /// Handles the login process by validating input fields and calling AuthService.
   Future<void> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
+    // Client-side validation: check if fields are empty
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter email and password')),
@@ -31,10 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
         isLoading = true;
       });
 
+      // Delegate authentication request to the AuthService
       await AuthService().loginUser(email: email, password: password);
 
-      // No need to navigate manually.
-      // AuthGate will detect the logged-in user and move to HomeScreen.
+      // Note: No manual navigation is needed here.
+      // AuthGate will automatically detect the updated auth state and route to HomeScreen.
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(
@@ -51,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
+    // Dispose controllers to free resources and prevent memory leaks
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -62,6 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        // Sleek gradient background matching the application theme
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
@@ -89,20 +97,29 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 28,
+                  vertical: 36,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Brand / Logo Icon Header
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF818CF8), Color(0xFF6366F1)], // Indigo 400 to 500
+                          colors: [
+                            Color(0xFF818CF8),
+                            Color(0xFF6366F1),
+                          ], // Indigo 400 to 500
                         ),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: const Color(0xFF6366F1).withValues(alpha: 0.3),
+                            color: const Color(
+                              0xFF6366F1,
+                            ).withValues(alpha: 0.3),
                             blurRadius: 16,
                             offset: const Offset(0, 6),
                           ),
@@ -117,6 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 24),
 
+                    // Title
                     const Text(
                       'Children Books App',
                       style: TextStyle(
@@ -130,17 +148,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 6),
 
+                    // Subtitle
                     const Text(
                       'Login to continue your reading journey',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF64748B),
-                      ),
+                      style: TextStyle(fontSize: 14, color: Color(0xFF64748B)),
                       textAlign: TextAlign.center,
                     ),
 
                     const SizedBox(height: 32),
 
+                    // Email input field
                     TextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -153,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 18),
 
+                    // Password input field
                     TextField(
                       controller: passwordController,
                       obscureText: true,
@@ -165,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 30),
 
+                    // Action buttons (Sign In)
                     SizedBox(
                       width: double.infinity,
                       height: 54,
@@ -191,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 16),
 
+                    // Navigate to Registration screen
                     TextButton(
                       onPressed: () {
                         Navigator.push(

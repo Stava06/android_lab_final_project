@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
 
+/// Screen allowing new users to create an account with full name, email, and password.
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
@@ -9,17 +10,21 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  // Input controllers for the registration fields
   final TextEditingController fullNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  // Flag to manage the loading spinner state during registration
   bool isLoading = false;
 
+  /// Validates input details and triggers user registration via AuthService.
   Future<void> register() async {
     final fullName = fullNameController.text.trim();
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
+    // 1. Client-side validation: Check that all inputs are filled
     if (fullName.isEmpty || email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(
         context,
@@ -27,6 +32,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       return;
     }
 
+    // 2. Client-side validation: Check password length requirement
     if (password.length < 6) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Password must be at least 6 characters')),
@@ -39,6 +45,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         isLoading = true;
       });
 
+      // Invoke user registration in Firebase Auth and Realtime Database
       await AuthService().registerUser(
         fullName: fullName,
         email: email,
@@ -51,10 +58,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
         const SnackBar(content: Text('User registered successfully')),
       );
 
+      // Navigate back to the Login screen upon successful registration
       Navigator.pop(context);
 
-      // After registration Firebase usually logs the user in automatically.
-      // AuthGate will detect it and move to HomeScreen.
+      // Note: Upon successful registration, Firebase Auth logs the user in automatically.
+      // AuthGate will capture the session update and redirect to the HomeScreen.
     } catch (e) {
       ScaffoldMessenger.of(
         context,
@@ -70,6 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   void dispose() {
+    // Dispose input controllers to avoid memory leaks when screen is destroyed
     fullNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
@@ -89,13 +98,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
+        // Registration page uses a green/teal gradient to distinguish it from the Login page
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
               Color(0xFFEEF2F6), // Slate 50
-              Color(0xFFE2F1F6), // Soft Greenish-Teal tint for Registration
+              Color(0xFFE2F1F6), // Soft Greenish-Teal tint
             ],
           ),
         ),
@@ -120,6 +130,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Brand / Logo Icon Header (Emerald colored for registration)
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -144,6 +155,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 24),
 
+                    // Title
                     const Text(
                       'Create Account',
                       style: TextStyle(
@@ -156,6 +168,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 6),
 
+                    // Subtitle
                     const Text(
                       'Sign up to find books for your kids',
                       style: TextStyle(
@@ -166,6 +179,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 32),
 
+                    // Full name field
                     TextField(
                       controller: fullNameController,
                       textCapitalization: TextCapitalization.words,
@@ -178,6 +192,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 18),
 
+                    // Email address field
                     TextField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -190,6 +205,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 18),
 
+                    // Password field
                     TextField(
                       controller: passwordController,
                       obscureText: true,
@@ -202,6 +218,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                     const SizedBox(height: 30),
 
+                    // Submit Registration Button
                     SizedBox(
                       width: double.infinity,
                       height: 54,

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+/// Screen that simulates uploading a new book demo for a specific age group and file format.
 class UploadBookScreen extends StatefulWidget {
-  final String fileType;
-  final String ageGroup;
+  final String fileType; // Format type, e.g., 'pdf' or 'word'
+  final String
+  ageGroup; // Target category age group, e.g., '0-4', '4-8', or '8-12'
 
   const UploadBookScreen({
     super.key,
@@ -15,31 +17,48 @@ class UploadBookScreen extends StatefulWidget {
 }
 
 class _UploadBookScreenState extends State<UploadBookScreen> {
+  // Controller for the book title field input
   final TextEditingController _nameController = TextEditingController();
+
+  // Key to identify the Form and validate text inputs
   final _formKey = GlobalKey<FormState>();
+
+  // Holds the name of the simulated file attached to the book
   String? _selectedDummyFile;
+
+  // Flag indicating if upload task is running
   bool _isUploading = false;
+
+  // Track progress fraction (0.0 to 1.0) of simulated upload
   double _uploadProgress = 0.0;
 
   @override
   void dispose() {
+    // Clean up title text controller resources
     _nameController.dispose();
     super.dispose();
   }
 
+  /// Generates a mock file name based on the entered book title and file type.
   void _pickDummyFile() {
     if (_isUploading) return;
     setState(() {
       final sanitizedTitle = _nameController.text.trim().isNotEmpty
-          ? _nameController.text.trim().replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_').toLowerCase()
+          ? _nameController.text
+                .trim()
+                .replaceAll(RegExp(r'[^a-zA-Z0-9]'), '_')
+                .toLowerCase()
           : 'book';
       _selectedDummyFile = 'mock_${sanitizedTitle}_demo.${widget.fileType}';
     });
   }
 
+  /// Simulates an asynchronous file upload to the server with progress bar updates.
   Future<void> _startUpload() async {
+    // 1. Validate book title text input form field
     if (!_formKey.currentState!.validate()) return;
 
+    // 2. Ensure user has attached a dummy file
     if (_selectedDummyFile == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -52,18 +71,21 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
           ),
           backgroundColor: Colors.redAccent,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
       );
       return;
     }
 
+    // 3. Initiate simulated upload
     setState(() {
       _isUploading = true;
       _uploadProgress = 0.0;
     });
 
-    // Animate upload progress from 0 to 100%
+    // Animate progress increment from 0 to 100% over 2 seconds
     for (int i = 1; i <= 20; i++) {
       await Future.delayed(const Duration(milliseconds: 100));
       if (!mounted) return;
@@ -72,6 +94,7 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
       });
     }
 
+    // 4. Complete upload: show success message and pop screen, returning book title
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -89,16 +112,22 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
           ),
           backgroundColor: Colors.green.shade600,
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
       );
+      // Return the uploaded book title back to the library list screen
       Navigator.pop(context, _nameController.text.trim());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeColor = widget.fileType == 'pdf' ? const Color(0xFFEF4444) : const Color(0xFF3B82F6);
+    // Dynamic theme color (red tint for PDF, blue tint for Word files)
+    final themeColor = widget.fileType == 'pdf'
+        ? const Color(0xFFEF4444)
+        : const Color(0xFF3B82F6);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
@@ -116,7 +145,7 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Intro text
+              // Intro texts and guide instructions
               const Text(
                 'Add a New Book',
                 style: TextStyle(
@@ -137,12 +166,15 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
               ),
               const SizedBox(height: 28),
 
-              // Title input
+              // Book Title input field container card
               Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(color: const Color(0xFFF1F5F9), width: 1.5),
+                  border: Border.all(
+                    color: const Color(0xFFF1F5F9),
+                    width: 1.5,
+                  ),
                 ),
                 padding: const EdgeInsets.all(20),
                 child: TextFormField(
@@ -161,6 +193,7 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
                     return null;
                   },
                   onChanged: (val) {
+                    // Update mock file name automatically if it has already been generated
                     if (_selectedDummyFile != null) {
                       _pickDummyFile();
                     }
@@ -169,7 +202,7 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
               ),
               const SizedBox(height: 28),
 
-              // File Selection Box
+              // File Selection interactive box
               const Text(
                 'File Attachment',
                 style: TextStyle(
@@ -184,7 +217,10 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 36,
+                    horizontal: 20,
+                  ),
                   decoration: BoxDecoration(
                     color: _selectedDummyFile != null
                         ? const Color(0xFF10B981).withValues(alpha: 0.04)
@@ -212,7 +248,9 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
                               ? Icons.cloud_done_rounded
                               : Icons.cloud_upload_rounded,
                           size: 36,
-                          color: _selectedDummyFile != null ? const Color(0xFF10B981) : themeColor,
+                          color: _selectedDummyFile != null
+                              ? const Color(0xFF10B981)
+                              : themeColor,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -245,7 +283,7 @@ class _UploadBookScreenState extends State<UploadBookScreen> {
               ),
               const SizedBox(height: 40),
 
-              // Upload state or Submit button
+              // Upload progress indicator or Action execution button
               if (_isUploading) ...[
                 Column(
                   children: [

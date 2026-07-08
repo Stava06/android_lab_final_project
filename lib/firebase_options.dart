@@ -1,8 +1,6 @@
-
 import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
-
 
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
@@ -35,7 +33,8 @@ class DefaultFirebaseOptions {
     appId: '1:939159106937:android:a7d0da5ff3b3a0e81e6ba8',
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
-    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    databaseURL:
+        'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
   );
   static const FirebaseOptions web = FirebaseOptions(
@@ -44,7 +43,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
     authDomain: 'androidfinalproject-3e903.firebaseapp.com',
-    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    databaseURL:
+        'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
   );
 
@@ -53,9 +53,11 @@ class DefaultFirebaseOptions {
     appId: '1:939159106937:ios:049dd4bade33da231e6ba8',
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
-    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    databaseURL:
+        'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
-    iosClientId: '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
+    iosClientId:
+        '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
     iosBundleId: 'com.example.androidLabFinalProject',
   );
 
@@ -64,9 +66,11 @@ class DefaultFirebaseOptions {
     appId: '1:939159106937:ios:049dd4bade33da231e6ba8',
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
-    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    databaseURL:
+        'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
-    iosClientId: '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
+    iosClientId:
+        '939159106937-2nufthf8tn8rb08c0blfipatpte707mn.apps.googleusercontent.com',
     iosBundleId: 'com.example.androidLabFinalProject',
   );
 
@@ -76,7 +80,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '939159106937',
     projectId: 'androidfinalproject-3e903',
     authDomain: 'androidfinalproject-3e903.firebaseapp.com',
-    databaseURL: 'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
+    databaseURL:
+        'https://androidfinalproject-3e903-default-rtdb.firebaseio.com',
     storageBucket: 'androidfinalproject-3e903.firebasestorage.app',
   );
 }

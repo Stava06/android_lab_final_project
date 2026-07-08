@@ -84,10 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 4),
               Text(
                 email,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Color(0xFF64748B),
-                ),
+                style: const TextStyle(fontSize: 14, color: Color(0xFF64748B)),
               ),
               const SizedBox(height: 32),
               SizedBox(
@@ -95,7 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 52,
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Color(0xFFE2E8F0), width: 1.5),
+                    side: const BorderSide(
+                      color: Color(0xFFE2E8F0),
+                      width: 1.5,
+                    ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -186,7 +186,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 6),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: color.withValues(alpha: 0.06),
                   borderRadius: BorderRadius.circular(10),
@@ -219,7 +222,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: showProfileDialog,
-            icon: const Icon(Icons.person_outline_rounded, color: Color(0xFF1E293B)),
+            icon: const Icon(
+              Icons.person_outline_rounded,
+              color: Color(0xFF1E293B),
+            ),
           ),
           IconButton(
             onPressed: logout,
@@ -229,9 +235,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: isLoadingUser
           ? const Center(
-              child: CircularProgressIndicator(
-                color: Color(0xFF6366F1),
-              ),
+              child: CircularProgressIndicator(color: Color(0xFF6366F1)),
             )
           : SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -250,7 +254,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF6366F1).withValues(alpha: 0.24),
+                          color: const Color(
+                            0xFF6366F1,
+                          ).withValues(alpha: 0.24),
                           blurRadius: 20,
                           offset: const Offset(0, 10),
                         ),
@@ -260,7 +266,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          fullName.isEmpty ? 'Hello, Reader! 👋' : 'Hello, $fullName! 👋',
+                          fullName.isEmpty
+                              ? 'Hello, Reader! 👋'
+                              : 'Hello, $fullName! 👋',
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -422,7 +430,9 @@ class _DemoBookListScreenState extends State<DemoBookListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final themeColor = widget.fileType == 'pdf' ? const Color(0xFFEF4444) : const Color(0xFF3B82F6);
+    final themeColor = widget.fileType == 'pdf'
+        ? const Color(0xFFEF4444)
+        : const Color(0xFF3B82F6);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
@@ -458,7 +468,9 @@ class _DemoBookListScreenState extends State<DemoBookListScreen> {
               child: Row(
                 children: [
                   Icon(
-                    widget.fileType == 'pdf' ? Icons.picture_as_pdf_rounded : Icons.description_rounded,
+                    widget.fileType == 'pdf'
+                        ? Icons.picture_as_pdf_rounded
+                        : Icons.description_rounded,
                     color: themeColor,
                     size: 20,
                   ),
@@ -490,10 +502,15 @@ class _DemoBookListScreenState extends State<DemoBookListScreen> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: const Color(0xFFF1F5F9), width: 1.5),
+                      border: Border.all(
+                        color: const Color(0xFFF1F5F9),
+                        width: 1.5,
+                      ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF0F172A).withValues(alpha: 0.02),
+                          color: const Color(
+                            0xFF0F172A,
+                          ).withValues(alpha: 0.02),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),
@@ -509,8 +526,14 @@ class _DemoBookListScreenState extends State<DemoBookListScreen> {
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: widget.fileType == 'pdf'
-                                    ? [const Color(0xFFFCA5A5), const Color(0xFFEF4444)]
-                                    : [const Color(0xFF93C5FD), const Color(0xFF3B82F6)],
+                                    ? [
+                                        const Color(0xFFFCA5A5),
+                                        const Color(0xFFEF4444),
+                                      ]
+                                    : [
+                                        const Color(0xFF93C5FD),
+                                        const Color(0xFF3B82F6),
+                                      ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),
@@ -570,29 +593,50 @@ class _DemoBookListScreenState extends State<DemoBookListScreen> {
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-                                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 14,
+                                      ),
                                     ),
                                     onPressed: () => openBook(book),
-                                    icon: const Icon(Icons.open_in_new_rounded, size: 14),
+                                    icon: const Icon(
+                                      Icons.open_in_new_rounded,
+                                      size: 14,
+                                    ),
                                     label: const Text(
                                       'OPEN',
-                                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w800,
+                                      ),
                                     ),
                                   )
                                 : OutlinedButton.icon(
                                     style: OutlinedButton.styleFrom(
                                       foregroundColor: themeColor,
-                                      side: BorderSide(color: themeColor.withValues(alpha: 0.5), width: 1.5),
+                                      side: BorderSide(
+                                        color: themeColor.withValues(
+                                          alpha: 0.5,
+                                        ),
+                                        width: 1.5,
+                                      ),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(12),
                                       ),
-                                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 14,
+                                      ),
                                     ),
                                     onPressed: () => getBook(book),
-                                    icon: const Icon(Icons.download_rounded, size: 14),
+                                    icon: const Icon(
+                                      Icons.download_rounded,
+                                      size: 14,
+                                    ),
                                     label: const Text(
                                       'GET',
-                                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800),
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w800,
+                                      ),
                                     ),
                                   ),
                           ),

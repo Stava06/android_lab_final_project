@@ -1,3 +1,6 @@
+// This file handles the authentication gate of the application.
+// It checks if the user is authenticated and redirects them to the appropriate screen.
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
